@@ -403,24 +403,60 @@ pre {
 }
 
 /* ========================================== */
-/*  大洗衣专属：仅聊天区域内部壁纸            */
+/*  大洗衣专属：iOS 亚克力全透毛玻璃质感      */
 /* ========================================== */
 
-/* 1. 精准定位：只在聊天内容区铺上壁纸 */
-div[class*="chat_chat-body__"] {
+/* 1. 把壁纸贴在整个右侧聊天面板（包含消息区和底侧输入区） */
+div[class^="chat_chat__"], div[class*=" chat_chat__"] {
   background-image: url('https://i.ibb.co/HD35chjN/31a195a90a8665e0745486dc8e22aabd.jpg') !important;
   background-size: cover !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
 }
 
-/* 2. 取消网页最外层的壁纸（如果你没删干净的话，这句能强行覆盖） */
-body {
+/* 2. 抽空中间聊天滚动区的底色，让壁纸透出来 */
+div[class*="chat_chat-body__"] {
+  background: transparent !important;
   background-image: none !important;
 }
 
-/* 3. 恢复主窗口的纯净底色（去除全局透明） */
-div[class*="window_window__"] {
-  background: var(--window-bg, #ffffff) !important;
-  backdrop-filter: none !important;
+/* 3. 底部输入框区域：高级毛玻璃悬浮 */
+div[class*="chat_chat-input-panel"] {
+  background: rgba(255, 255, 255, 0.2) !important; /* 极低透明度白底 */
+  backdrop-filter: blur(20px) !important;          /* 强力高斯模糊 */
+  -webkit-backdrop-filter: blur(20px) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.2) !important; /* 玻璃顶部反光线 */
+}
+
+/* 底部输入框药丸本体：半透明白 */
+div[class*="chat_chat-input-panel-inner"] {
+  background: rgba(255, 255, 255, 0.55) !important;
+  border: none !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* 4. 聊天气泡全局：无边框 + 毛玻璃 */
+div[class*="chat-message-item"] {
+  border: none !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* 5. 用户发出的气泡：半透明黑 + 纯白字 (极高清晰度) */
+div[class*="chat-message-user"] div[class*="chat-message-item"] {
+  background-color: rgba(28, 28, 30, 0.65) !important; /* iOS黑，65%透明度 */
+  color: #ffffff !important;
+}
+div[class*="chat-message-user"] div[class*="chat-message-item"] * {
+  color: #ffffff !important; /* 强制内部所有文字变白 */
+}
+
+/* 6. AI回复的气泡：半透明白 + 深黑字 (极高清晰度) */
+div[class*="chat-message"]:not([class*="chat-message-user"]) div[class*="chat-message-item"] {
+  background-color: rgba(255, 255, 255, 0.75) !important; /* 纯白，75%透明度 */
+  color: #1c1c1e !important;
+}
+div[class*="chat-message"]:not([class*="chat-message-user"]) div[class*="chat-message-item"] * {
+  color: #1c1c1e !important; /* 强制内部所有文字变黑 */
 }
