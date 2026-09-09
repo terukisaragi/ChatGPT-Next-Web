@@ -8,7 +8,7 @@
   --white: white;
   --black: rgb(28, 28, 30);        /* iOS深黑 */
   --gray: rgb(242, 242, 247);      /* iOS浅灰背景 */
-  --primary: rgb(0, 122, 255);     /* iOS蓝 */
+  --primary: rgb(28, 28, 30);     /* 极致黑 */
   --second: rgb(229, 229, 234);    /* iOS分割线灰 */
   
   --hover-color: #f3f3f3;
@@ -30,7 +30,7 @@
   --white: rgb(30, 30, 30);
   --black: rgb(187, 187, 187);
   --gray: rgb(21, 21, 21);
-  --primary: rgb(29, 147, 171);
+  --primary: rgb(28, 28, 30);
   --second: rgb(27 38 42);
   --hover-color: #323232;
 
@@ -459,4 +459,9 @@ div[class*="chat-message"]:not([class*="chat-message-user"]) div[class*="chat-me
 }
 div[class*="chat-message"]:not([class*="chat-message-user"]) div[class*="chat-message-item"] * {
   color: #1c1c1e !important; /* 强制内部所有文字变黑 */
+}
+
+/* 强制消灭所有遗留的蓝色按钮和边框 */
+:root {
+  --primary: rgb(28, 28, 30) !important; 
 }
